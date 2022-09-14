@@ -1,4 +1,5 @@
 #include "AnimSpriteComponent.h"
+#include "Math.h"
 
 AnimSpriteComponent::AnimSpriteComponent(Actor* owner, int drawOrder)
 	:SpriteComponent(owner,drawOrder)

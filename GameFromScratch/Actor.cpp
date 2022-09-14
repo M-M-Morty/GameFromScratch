@@ -1,6 +1,7 @@
 #include "Actor.h"
 #include "Math.h"
 #include "Game.h"
+#include <algorithm>
 
 Actor::Actor(Game* game)
 	:mState(EActive)

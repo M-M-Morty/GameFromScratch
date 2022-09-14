@@ -36,6 +36,9 @@
     <ClInclude Include="SpriteComponent.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -59,5 +62,25 @@
     <ClCompile Include="SpriteComponent.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="BGSpriteComponent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Ship01.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Assets\Ship02.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Assets\Ship03.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Assets\Ship04.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -2,6 +2,8 @@
 #include "SDL/SDL.h"
 #include <vector>
 #include <string>
+#include <unordered_map>
+
 
 class Game
 {
@@ -26,9 +28,17 @@ private:
 	void LoadData();
 	void UnloadData();
 
-	std::vector<class Actor*> mActors;//保存所有在游戏中的actor
-	std::vector<class Actor* > mPendingActors;//暂时保存即将添加到mActor序列的actor
-	std::vector<class SpriteComponent*> mSprites;//保存需绘制的精灵
+	//保存加载的地图
+	std::unordered_map<std::string, SDL_Texture*> mTextures;
+
+	//保存所有在游戏中的actor
+	std::vector<class Actor*> mActors;
+
+	//暂时保存即将添加到mActor序列的actor
+	std::vector<class Actor* > mPendingActors;
+
+	//保存需绘制的精灵
+	std::vector<class SpriteComponent*> mSprites;
 
 
 	SDL_Window* mWindow;
@@ -36,4 +46,7 @@ private:
 	Uint32 mTicksCount;
 	bool mIsRunning;
 	bool mUpdatingActors;//记录当前是否在更新actor
+
+	//飞船游戏独有的变量
+	class Ship* mShip;
 };

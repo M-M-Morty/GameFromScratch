@@ -1,4 +1,5 @@
-﻿#include "Game.h"
+﻿#pragma once
+#include "Game.h"
 #include "Math.h"
 #include "Component.h"
 
@@ -41,7 +42,6 @@ public:
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);
 
-	State GetState()const { return mState; }
 private:
 	State mState;//actor的状态
 
