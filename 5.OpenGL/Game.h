@@ -30,6 +30,7 @@ private:
 	void UpdateGame();
 	void GenerateOutput();
 	bool LoadShaders();
+	void CreateSpriteVerts();
 	void LoadData();
 	void UnloadData();
 

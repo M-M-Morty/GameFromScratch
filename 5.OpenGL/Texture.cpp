@@ -40,7 +40,7 @@ bool Texture::Load(const std::string& fileName)
 
 	glTexImage2D(GL_TEXTURE_2D, 0, format, mWidth, mHeight, 0, format,
 		GL_UNSIGNED_BYTE, image);
-
+	//释放图像数据的内存
 	SOIL_free_image_data(image);
 
 	// Enable bilinear filtering

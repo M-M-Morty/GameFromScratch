@@ -63,6 +63,13 @@ bool Game::Initialize()
 	//清除某些平台上的良性错误代码。
 	glGetError();
 
+	if (!LoadShaders())
+	{
+		SDL_Log("Failed to load shaders.");
+		return false;
+	}
+
+	CreateSpriteVerts();
 
 	LoadData();
 
@@ -177,7 +184,7 @@ void Game::GenerateOutput()
 bool Game::LoadShaders()
 {
 	mSpriteShader = new Shader();
-	if (!mSpriteShader->Load("Shaders/Tranform.vert", "Shaders/Sprite.frag"))
+	if (!mSpriteShader->Load("Sprite.vert", "Sprite.frag"))
 	{
 		return false;
 	}
@@ -188,6 +195,23 @@ bool Game::LoadShaders()
 	mSpriteShader->SetMatrixUniform("uViewProj", viewProj);
 
 	return true;
+}
+
+void Game::CreateSpriteVerts()
+{
+	float vertices[] = {
+		-0.5f,  0.5f, 0.f, 0.f, 0.f, // top left
+		 0.5f,  0.5f, 0.f, 1.f, 0.f, // top right
+		 0.5f, -0.5f, 0.f, 1.f, 1.f, // bottom right
+		-0.5f, -0.5f, 0.f, 0.f, 1.f  // bottom left
+	};
+
+	unsigned int indices[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	mSpriteVerts = new VertexArray(vertices, 4, indices, 6);
 }
 
 void Game::LoadData()

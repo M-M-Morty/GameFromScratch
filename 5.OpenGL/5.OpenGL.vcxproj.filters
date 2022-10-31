@@ -21,12 +21,6 @@
     <ClInclude Include="Actor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="AnimSpriteComponent.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="BGSpriteComponent.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -74,9 +68,6 @@
     <ClCompile Include="Actor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="AnimSpriteComponent.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -90,9 +81,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SpriteComponent.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="BGSpriteComponent.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
@@ -134,6 +122,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="Tansform.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Sprite.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Sprite.frag">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>

@@ -139,9 +139,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="AnimSpriteComponent.h" />
     <ClInclude Include="Asteroid.h" />
-    <ClInclude Include="BGSpriteComponent.h" />
     <ClInclude Include="CircleComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
@@ -158,9 +156,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="AnimSpriteComponent.cpp" />
     <ClCompile Include="Asteroid.cpp" />
-    <ClCompile Include="BGSpriteComponent.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -179,6 +175,8 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
   <ItemGroup>
     <None Include="Basic.frag" />
     <None Include="Basic.vert" />
+    <None Include="Sprite.frag" />
+    <None Include="Sprite.vert" />
     <None Include="Tansform.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
