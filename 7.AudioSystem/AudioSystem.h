@@ -3,6 +3,8 @@
 #include <vector>
 #include <unordered_map>
 
+#include "Math.h"
+
 namespace FMOD
 {
 	class System;
@@ -30,7 +32,8 @@ private:
 	std::unordered_map<std::string, FMOD::Studio::EventDescription*> mEvents;
 	// Event的ID（引用）到event实例的映射
 	std::unordered_map<unsigned int, FMOD::Studio::EventInstance*> mEventInstances;
-
+	// 总线（一组相同类型的声音）映射
+	std::unordered_map<std::string, FMOD::Studio::Bus*> mBuses;
 	//FMOD Studios系统
 	FMOD::Studio::System* mSystem;
 	//FMOD低阶系统
@@ -50,9 +53,14 @@ public:
 
 	class SoundEvent PlayEvent(const std::string& name);
 
-
 	void Update(float deltaTime);
-
+	
+	void SetListener(const Matrix4& viewMatrix);
+	// 控制总线
+	float GetBusVolume(const std::string& name) const;
+	bool GetBusPaused(const std::string& name) const;
+	void SetBusVolume(const std::string& name, float volume);
+	void SetBusPaused(const std::string& name, bool pause);
 protected:
 	friend class SoundEvent;
 	FMOD::Studio::EventInstance* GetEventInstance(unsigned int id);

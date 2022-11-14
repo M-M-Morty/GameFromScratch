@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 
+class Renderer;
 
 class Game
 {
@@ -20,6 +21,7 @@ public:
 	void RemoveActor(class Actor* actor);
 
 	class Renderer* GetRenderer() { return mRenderer; }
+	class AudioSystem* GetAudioSystem() { return mAudioSystem; }
 private:
 	void ProcessInput();
 	void UpdateGame();

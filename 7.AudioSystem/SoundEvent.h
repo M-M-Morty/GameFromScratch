@@ -22,6 +22,9 @@ public:
 	float GetVolume() const;
 	float GetPitch() const;
 	float GetParameter(const std::string& name);
+	//
+	bool Is3D() const;
+	void Set3DAttributes(const Matrix4& worldTrans);
 protected:
 	friend class AudioSystem;
 	SoundEvent(class AudioSystem* system, unsigned int id);

@@ -121,3 +121,47 @@ float SoundEvent::GetParameter(const std::string& name)
 	return retVal;
 }
 
+bool SoundEvent::Is3D() const
+{
+	bool retVal = false;
+	auto event = mSystem ? mSystem->GetEventInstance(mID) : nullptr;
+	if (event)
+	{
+		FMOD::Studio::EventDescription* ed = nullptr;
+		event-> getDescription(&ed);
+		if (ed)
+		{
+			ed->is3D(&retVal);
+		}
+	}
+	return retVal;
+}
+
+namespace
+{
+	FMOD_VECTOR VecToFMOD(const Vector3& in)
+	{
+		// Convert from our coordinates (+x forward, +y right, +z up)
+		// to FMOD (+z forward, +x right, +y up)
+		FMOD_VECTOR v;
+		v.x = in.y;
+		v.y = in.z;
+		v.z = in.x;
+		return v;
+	}
+}
+
+void SoundEvent::Set3DAttributes(const Matrix4& worldTrans)
+{
+	auto event = mSystem ? mSystem->GetEventInstance(mID) : nullptr;
+	if (event)
+	{
+		FMOD_3D_ATTRIBUTES attr;
+		attr.position = VecToFMOD(worldTrans.GetTranslation());
+		attr.forward = VecToFMOD(worldTrans.GetXAxis());
+		attr.up = VecToFMOD(worldTrans.GetZAxis());
+		attr.velocity = { 0.0f, 0.0f, 0.0f };
+		event->set3DAttributes(&attr);
+	}
+}
+

@@ -72,6 +72,9 @@
     <ClInclude Include="SoundEvent.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AudioComponent.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
@@ -129,6 +132,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SoundEvent.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioComponent.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

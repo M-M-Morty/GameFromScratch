@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{7e8d87b2-a620-4078-8f5a-2820f6e0eb3d}</ProjectGuid>
-    <RootNamespace>_7_AudioSystem</RootNamespace>
+    <ProjectGuid>{2c04eb54-5b51-40e9-8239-c30eef4bd215}</ProjectGuid>
+    <RootNamespace>_8_InputSystem</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -76,13 +76,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Code\VS\Github\External\SOIL\include;D:\Code\VS\Github\External\GLEW\include;D:\Code\VS\Github\External\SDL\include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\inc;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Code\VS\Github\External\SOIL\include;D:\Code\VS\Github\External\GLEW\include;D:\Code\VS\Github\External\SDL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;glew32.lib;SOIL.lib;fmodL_vc.lib;fmodstudioL_vc.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:\Code\VS\Github\External\GLEW\lib\win\x86;D:\Code\VS\Github\External\SDL\lib\win\x86;D:\Code\VS\Github\External\SOIL\lib\win\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;glew32.lib;SOIL.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Code\VS\Github\External\GLEW\lib\win\x86;D:\Code\VS\Github\External\SDL\lib\win\x86;D:\Code\VS\Github\External\SOIL\lib\win\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(ProjectDir)\..\..\external\SDL\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
@@ -111,14 +111,14 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\inc;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;D:\Code\VS\Github\External\SOIL\include;D:\Code\VS\Github\External\GLEW\include;D:\Code\VS\Github\External\SDL\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Code\VS\Github\External\SOIL\include;D:\Code\VS\Github\External\GLEW\include;D:\Code\VS\Github\External\SDL\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\Code\VS\Github\External\SDL\lib\win\x86;D:\Code\VS\Github\External\SOIL\lib\win\x86;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\lib;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\Code\VS\Github\External\SDL\lib\win\x86;D:\Code\VS\Github\External\SOIL\lib\win\x86</AdditionalLibraryDirectories>
       <PreventDllBinding>true</PreventDllBinding>
-      <AdditionalDependencies>opengl32.lib;SDL2.lib;SDL2main.lib;SDL2_ttf.lib;SDL2_mixer.lib;SDL2_image.lib;glew32.lib;SOIL.lib;fmodL_vc.lib;fmodstudioL_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.dll;SDL2main.dll;SDL2_ttf.dll;SDL2_mixer.dll;SDL2_image.dll;SOIL.dll</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -139,54 +139,36 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
-    <ClInclude Include="AudioComponent.h" />
-    <ClInclude Include="AudioSystem.h" />
-    <ClInclude Include="CameraActor.h" />
+    <ClInclude Include="AnimSpriteComponent.h" />
+    <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="BGSpriteComponent.h" />
     <ClInclude Include="CircleComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="Laser.h" />
     <ClInclude Include="Math.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="MovementComponent.h" />
-    <ClInclude Include="PlaneActor.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="SoundEvent.h" />
+    <ClInclude Include="Random.h" />
+    <ClInclude Include="Ship.h" />
     <ClInclude Include="SpriteComponent.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
-    <ClCompile Include="AudioComponent.cpp" />
-    <ClCompile Include="AudioSystem.cpp" />
-    <ClCompile Include="CameraActor.cpp" />
+    <ClCompile Include="AnimSpriteComponent.cpp" />
+    <ClCompile Include="Asteroid.cpp" />
+    <ClCompile Include="BGSpriteComponent.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputComponent.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Laser.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Math.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="MovementComponent.cpp" />
-    <ClCompile Include="PlaneActor.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="SoundEvent.cpp" />
+    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="Ship.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="VertexArray.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\BasicMesh.frag" />
-    <None Include="Shaders\BasicMesh.vert" />
-    <None Include="Shaders\Phong.frag" />
-    <None Include="Shaders\Phong.vert" />
-    <None Include="Shaders\Sprite.frag" />
-    <None Include="Shaders\Sprite.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
