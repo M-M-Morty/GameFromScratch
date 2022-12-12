@@ -47,20 +47,39 @@ void Actor::UpdateActor(float deltaTime)
 {
 }
 
-void Actor::ProcessInput(const uint8_t* keyState)
+void Actor::ProcessInput(const struct InputState& state)
 {
 	if (mState == EActive)
 	{
 		for (auto comp : mComponents)
 		{
-			comp->ProcessInput(keyState);
+			comp->ProcessInput(state);
 		}
-		ActorInput(keyState);
+		ActorInput(state);
 	}
 }
 
-void Actor::ActorInput(const uint8_t* keyState)
+void Actor::ActorInput(const struct InputState& state)
 {
+}
+
+
+void Actor::ComputeWorldTransform()
+{
+	if (mRecomputeWorldTransform)
+	{
+		mRecomputeWorldTransform = false;
+		// Scale, then rotate, then translate
+		mWorldTransform = Matrix4::CreateScale(mScale);
+		mWorldTransform *= Matrix4::CreateRotationZ(mRotation);
+		mWorldTransform *= Matrix4::CreateTranslation(Vector3(mPosition.x, mPosition.y, 0.0f));
+
+		// Inform components world transform updated
+		for (auto comp : mComponents)
+		{
+			comp->OnUpdateWorldTransform();
+		}
+	}
 }
 
 void Actor::AddComponent(Component* component)

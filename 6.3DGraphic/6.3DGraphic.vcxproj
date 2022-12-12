@@ -24,6 +24,7 @@
     <ProjectGuid>{32d0b5db-092e-4c48-a63a-567e7f0dac1f}</ProjectGuid>
     <RootNamespace>_6_3DGraphic</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>06.3DGraphic</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

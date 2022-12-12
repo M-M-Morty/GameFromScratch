@@ -11,7 +11,9 @@ public:
 	//根据deltaTime更新组件
 	virtual void Update(float deltaTime);
 	//为当前组件处理输入
-	virtual void ProcessInput(const uint8_t* keyState){}
+	virtual void ProcessInput(const struct InputState& state){}
+
+	virtual void OnUpdateWorldTransform() { }
 
 	int GetUpdateOrder() const { return mUpdateOrder; }
 protected:

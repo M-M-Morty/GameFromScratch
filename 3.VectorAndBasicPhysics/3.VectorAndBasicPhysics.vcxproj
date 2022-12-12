@@ -24,6 +24,7 @@
     <ProjectGuid>{3ac7e22e-8ce5-4f53-a924-3303668dba1d}</ProjectGuid>
     <RootNamespace>_3_VectorAndBasicPhysics</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>03.VectorAndBasicPhysics</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

@@ -29,6 +29,8 @@ private:
 	void ProcessInput();
 	void UpdateGame();
 	void GenerateOutput();
+	bool LoadShaders();
+	void CreateSpriteVerts();
 	void LoadData();
 	void UnloadData();
 
@@ -38,15 +40,22 @@ private:
 	//保存所有在游戏中的actor
 	std::vector<class Actor*> mActors;
 
+	class InputSystem* mInputSystem;
+
 	//暂时保存即将添加到mActor序列的actor
 	std::vector<class Actor* > mPendingActors;
 
-	//保存需绘制的精灵
+	// All the sprite components drawn
 	std::vector<class SpriteComponent*> mSprites;
+
+	// Sprite 着色器
+	class Shader* mSpriteShader;
+	// Sprite 顶点数组
+	class VertexArray* mSpriteVerts;
 
 
 	SDL_Window* mWindow;
-	SDL_Renderer* mRenderer;
+	SDL_GLContext mContext;
 	Uint32 mTicksCount;
 	bool mIsRunning;
 	bool mUpdatingActors;//记录当前是否在更新actor

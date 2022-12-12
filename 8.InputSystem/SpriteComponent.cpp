@@ -1,6 +1,9 @@
 #include "SpriteComponent.h"
 #include "Actor.h"
 #include "Game.h"
+#include "Texture.h"
+#include "Shader.h"
+#include "Math.h"
 
 SpriteComponent::SpriteComponent(Actor* owner, int drawOrder)
 	:Component(owner)
@@ -17,33 +20,34 @@ SpriteComponent::~SpriteComponent()
 	mOwner->GetGame()->RemoveSprite(this);
 }
 
-void SpriteComponent::Draw(SDL_Renderer* renderer)
+void SpriteComponent::Draw(class Shader* shader)
 {
 	if (mTexture)
 	{
-		SDL_Rect r;
-		//根据拥有者的scale值，缩放绘制矩形的高度和宽度
-		r.w = static_cast<int>(mTexWidth * mOwner->GetScale());
-		r.h = static_cast<int>(mTexHeight * mOwner->GetScale());
-		//actor位置描述的是中心位置，而渲染长方形的位置描述的是左上角。
-		r.x = static_cast<int>(mOwner->GetPosition().x - r.w / 2);
-		r.y = static_cast<int>(mOwner->GetPosition().y - r.h / 2);
+		// Scale the quad by the width/height of texture
+		Matrix4 scaleMat = Matrix4::CreateScale(
+			static_cast<float>(mTexWidth),
+			static_cast<float>(mTexHeight),
+			1.0f);
 
+		Matrix4 world = scaleMat * mOwner->GetWorldTransform();
 
-		SDL_RenderCopyEx(
-			renderer,
-			mTexture,//要绘制的贴图
-			nullptr,
-			&r,		//目标长方形
-			-Math::ToDegrees(mOwner->GetRotation()),//弧度制转角度值，且正方向不同
-			nullptr,
-			SDL_FLIP_NONE);
+		// Since all sprites use the same shader/vertices,
+		// the game first sets them active before any sprite draws
+
+		// Set world transform
+		shader->SetMatrixUniform("uWorldTransform", world);
+		// Set current texture
+		mTexture->SetActive();
+		// Draw quad
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 	}
 }
 
-void SpriteComponent::SetTexture(SDL_Texture* texture)
+void SpriteComponent::SetTexture(Texture* texture)
 {
 	mTexture = texture;
-	//查询贴图的高度和宽度以设置成员变量
-	SDL_QueryTexture(texture, nullptr, nullptr, &mTexWidth, &mTexHeight);
+	// Set width/height
+	mTexWidth = texture->GetWidth();
+	mTexHeight = texture->GetHeight();
 }

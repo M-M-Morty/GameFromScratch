@@ -7,7 +7,7 @@ class InputComponent :public MoveComponent
 public:
 	InputComponent(class Actor* owner);
 
-	virtual void ProcessInput(const uint8_t* keyState) override;
+	virtual void ProcessInput(const struct InputState& state) override;
 
 	//为私有成员变量设置的getter/setter函数
 	float GetMaxForward() const { return mMaxForwardSpeed; }

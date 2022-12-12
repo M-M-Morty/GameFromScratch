@@ -6,9 +6,13 @@
 #include "Asteroid.h"
 #include <algorithm>
 #include "Random.h"
+#include "InputSystem.h"
+#include "Texture.h"
+#include "VertexArray.h"
+#include "Shader.h"
+
 Game::Game()
 	:mWindow(nullptr)
-	,mRenderer(nullptr)
 	,mIsRunning(true)
 	,mUpdatingActors(false)
 {
@@ -16,31 +20,39 @@ Game::Game()
 
 bool Game::Initialize()
 {
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_GAMECONTROLLER) != 0)
 	{
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 		return false;
 	}
 
-	mWindow = SDL_CreateWindow("Ship Game", 100, 100, 1024, 768, 0);
-	if (!mWindow)
+	// Set OpenGL attributes
+	// Use the core OpenGL profile
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	// Specify version 3.3
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+	// Request a color buffer with 8-bits per RGBA channel
+	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
+	// Enable double buffering
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	// Force OpenGL to use hardware acceleration
+	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+
+	mWindow = SDL_CreateWindow("Game Programming in C++ (Chapter 8)", 100, 100,
+		1024, 768, SDL_WINDOW_OPENGL);
+	// Initialize input system
+	mInputSystem = new InputSystem();
+	if (!mInputSystem->Initialize())
 	{
-		SDL_Log("Failed to create window: %s", SDL_GetError());
+		SDL_Log("Failed to initialize input system");
 		return false;
 	}
 
-	mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (!mRenderer)
-	{
-		SDL_Log("Failed to create renderer: %s", SDL_GetError());
-		return false;
-	}
-
-	if(IMG_Init(IMG_INIT_PNG) == 0)
-	{
-		SDL_Log("Unable to initialize SDL_image:%s", SDL_GetError());
-		return false;
-	}
+	
 
 	LoadData();
 
@@ -61,6 +73,8 @@ void Game::RunLoop()
 
 void Game::ProcessInput()
 {
+	mInputSystem->PrepareForUpdate();
+
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -69,11 +83,17 @@ void Game::ProcessInput()
 		case SDL_QUIT:
 			mIsRunning = false;
 			break;
+		case SDL_MOUSEWHEEL:
+			mInputSystem->ProcessEvent(event);
+			break;
+		default:
+			break;
 		}
 	}
 
-	const Uint8* keyState = SDL_GetKeyboardState(NULL);
-	if (keyState[SDL_SCANCODE_ESCAPE])
+	mInputSystem->Update();
+	const InputState& state = mInputSystem->GetState();
+	if (state.Keyboard.GetKeyState(SDL_SCANCODE_ESCAPE))
 	{
 		mIsRunning = false;
 	}
@@ -81,7 +101,7 @@ void Game::ProcessInput()
 	mUpdatingActors = true;
 	for (auto actor : mActors)
 	{
-		actor->ProcessInput(keyState);
+		actor->ProcessInput(state);
 	}
 	mUpdatingActors = false;
 }
@@ -134,16 +154,58 @@ void Game::UpdateGame()
 
 void Game::GenerateOutput()
 {
-	SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255);
-	SDL_RenderClear(mRenderer);
+	// Set the clear color to grey
+	glClearColor(0.86f, 0.86f, 0.86f, 1.0f);
+	// Clear the color buffer
+	glClear(GL_COLOR_BUFFER_BIT);
 
-	//绘制所有的sprite组件
+	// Draw all sprite components
+	// Enable alpha blending on the color buffer
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	// Set shader/vao as active
+	mSpriteShader->SetActive();
+	mSpriteVerts->SetActive();
 	for (auto sprite : mSprites)
 	{
-		sprite->Draw(mRenderer);
+		sprite->Draw(mSpriteShader);
 	}
 
-	SDL_RenderPresent(mRenderer);
+	// Swap the buffers
+	SDL_GL_SwapWindow(mWindow);
+}
+
+bool Game::LoadShaders()
+{
+	mSpriteShader = new Shader();
+	if (!mSpriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
+	{
+		return false;
+	}
+
+	mSpriteShader->SetActive();
+	// Set the view-projection matrix
+	Matrix4 viewProj = Matrix4::CreateSimpleViewProj(1024.f, 768.f);
+	mSpriteShader->SetMatrixUniform("uViewProj", viewProj);
+	return true;
+}
+
+void Game::CreateSpriteVerts()
+{
+	float vertices[] = {
+		-0.5f,  0.5f, 0.f, 0.f, 0.f, // top left
+		 0.5f,  0.5f, 0.f, 1.f, 0.f, // top right
+		 0.5f, -0.5f, 0.f, 1.f, 1.f, // bottom right
+		-0.5f, -0.5f, 0.f, 0.f, 1.f  // bottom left
+	};
+
+	unsigned int indices[] = {
+		0, 1, 2,
+		2, 3, 0
+	};
+
+	mSpriteVerts = new VertexArray(vertices, 4, indices, 6);
 }
 
 void Game::LoadData()
@@ -230,8 +292,12 @@ void Game::RemoveAsteroid(Asteroid* ast)
 void Game::Shutdown()
 {
 	UnloadData();
+
+	mInputSystem->Shutdown();
+	delete mInputSystem;
+
 	IMG_Quit();
-	SDL_DestroyRenderer(mRenderer);
+	
 	SDL_DestroyWindow(mWindow);
 	SDL_Quit();
 }

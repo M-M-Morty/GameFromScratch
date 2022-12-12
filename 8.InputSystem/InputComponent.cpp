@@ -12,7 +12,7 @@ InputComponent::InputComponent(Actor* owner)
 }
 
 
-void InputComponent::ProcessInput(const uint8_t* keyState)
+void InputComponent::ProcessInput(const struct InputState& state)
 {
 	float forwardSpeed = 0.f;
 	if (keyState[mForwardKey])

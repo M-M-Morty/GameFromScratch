@@ -13,15 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{2bff6f22-0744-4e9c-bef8-fed86f88364c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimSpriteComponent.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="BGSpriteComponent.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
@@ -57,12 +54,21 @@
     <ClInclude Include="Laser.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimSpriteComponent.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
@@ -78,9 +84,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SpriteComponent.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="BGSpriteComponent.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Ship.cpp">
@@ -104,5 +107,34 @@
     <ClCompile Include="Laser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexArray.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Basic.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Basic.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.frag">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.vert">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shaders\Transform.vert">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
