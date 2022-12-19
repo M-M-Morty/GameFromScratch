@@ -76,7 +76,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Code\VS\Github\External\SOIL\include;D:\Code\VS\Github\External\GLEW\include;D:\Code\VS\Github\External\SDL\include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\inc;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Code\VS\Github\External\rapidjson\include;D:\Code\VS\Github\External\SOIL\include;D:\Code\VS\Github\External\GLEW\include;D:\Code\VS\Github\External\SDL\include;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\studio\inc;C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,6 +160,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClInclude Include="GBuffer.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="MatrixPalette.h" />
     <ClInclude Include="Mesh.h" />
@@ -203,6 +205,7 @@ xcopy "$(ProjectDir)\..\..\external\GLEW\lib\win\x86\*.dll" "$(OutDir)" /i /s /y
     <ClCompile Include="GBuffer.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="Mesh.cpp" />

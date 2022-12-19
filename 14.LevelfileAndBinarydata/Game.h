@@ -9,6 +9,9 @@ class Renderer;
 class AudioSystem;
 class PhysWorld;
 class HUD;
+class FollowActor;
+class PlaneActor;
+class SpriteComponent;
 
 class Game
 {
@@ -54,9 +57,9 @@ public:
 
 	class Animation* GetAnimation(const std::string& fileName);
 	// Game-specific
-	void AddPlane(class PlaneActor* plane);
-	void RemovePlane(class PlaneActor* plane);
-	std::vector<class PlaneActor*>& GetPlanes() { return mPlanes; }
+	void AddPlane(PlaneActor* plane);
+	void RemovePlane(PlaneActor* plane);
+	std::vector<PlaneActor*>& GetPlanes() { return mPlanes; }
 private:
 	void ProcessInput();
 	void HandleKeyPress(int key);
@@ -92,8 +95,8 @@ private:
 	bool mUpdatingActors;
 
 	//特定游戏代码
-	class FollowActor* mFollowActor;
-	std::vector<class PlaneActor*> mPlanes;
-	class SpriteComponent* mCrosshair;
+	FollowActor* mFollowActor;
+	std::vector<PlaneActor*> mPlanes;
+	SpriteComponent* mCrosshair;
 	SoundEvent mMusicEvent;	
 };
